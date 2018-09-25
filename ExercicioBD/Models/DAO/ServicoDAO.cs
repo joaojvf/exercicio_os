@@ -16,8 +16,29 @@ namespace ExercicioBD.Models.DAO
             conn = new ConexaoBD();
         }
 
+        public DataTable ListarCarrinho(OrdemServico os)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                MySqlDataAdapter sqlData;
+                sqlData = new MySqlDataAdapter("SELECT id_os_servico, servico.cod_servico, servico.nome, servico.valor, servico.tempo_medio, quantidade FROM os_servico, servico" +
+                                                                                            "WHERE servico.cod_servico = os_servico.servico_id_servico AND " +
+                                                                                                    "os_servico.ordem_de_servico_numero=" + os.Numero, conn.Conexao);
+                sqlData.Fill(table);
 
-       
+                return table;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Conexao.Close();
+            }
+
+        }
 
         public DataTable ListarTodos()
         {

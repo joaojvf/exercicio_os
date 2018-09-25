@@ -91,12 +91,12 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantidade">
                         <ItemTemplate>
-                            <asp:TextBox ID="TxtQuantidade" runat="server"></asp:TextBox>
+                            <asp:Label ID="LblQuantidade" runat="server" Text='<%# Bind("quantidade") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnAdd" runat="server" Text="Adicionar" CommandName = "Update" />
+                            <asp:LinkButton ID="btnAdd" runat="server" Text="..." CommandName = "" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

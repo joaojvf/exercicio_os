@@ -25,7 +25,7 @@ namespace ExercicioBD
             {
                 cliente = Session["cliente"] as Cliente;
                 os = Session["OrdemDeServico"] as OrdemServico;
-                PopularGrid();
+                PopularGridServicos();
             }
 
         }
@@ -41,7 +41,7 @@ namespace ExercicioBD
             return osDao.Inserir(os);
         }
 
-        public void PopularGrid()
+        public void PopularGridServicos()
         {
             ServicoDAO osDao = new ServicoDAO();
             DataTable dTable = osDao.ListarTodos();
@@ -50,6 +50,14 @@ namespace ExercicioBD
             gdvServico.DataBind();
         }
 
+        public void PopularGridCarrinho()
+        {
+            ServicoDAO osDao = new ServicoDAO();
+            DataTable dTable = osDao.ListarCarrinho(os);
+
+            gdvCarrinho.DataSource = dTable;
+            gdvCarrinho.DataBind();
+        }
 
         protected void gdvServico_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -82,6 +90,7 @@ namespace ExercicioBD
                 if (osDao.Inserir(osServ))
                 {
                     LblResultado.Text = "Foi";
+                    PopularGridCarrinho();
                 }
                 else
                 {
